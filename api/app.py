@@ -7,6 +7,9 @@ app = Flask(__name__)  # __name__ 代表目前執行的模組
 def home():
     return render_template("index.html")
 
+@app.route("/test")  # 當網站連接到根目錄底下的test路徑，執行test函式
+def test():
+    return "This is test 123."
 
 @app.route("/submit", methods=["POST"])
 def submit():

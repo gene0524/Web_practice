@@ -20,5 +20,18 @@ def submit():
     return render_template("hello.html", name=input_name, age=input_age)
 
 
+def process_query(q):
+    if q == "dinosaurs":
+        return "Dinosaurs ruled the Earth 200 million years ago"
+    else:
+        return "Unknown"
+
+
+@app.route("/query", methods=["GET"])
+def query():
+    q = request.args.get("q")
+    return process_query(q)
+
+
 if __name__ == "__main__":
     app.run(debugger=True)

@@ -8,9 +8,9 @@ def home():
     return render_template("index.html")
 
 
-@app.route("/ttt")  # 當網站連接到根目錄底下的test路徑，執行test函式
-def ttt():
-    return "This is ttt 123."
+@app.route("/test")  # 當網站連接到根目錄底下的test路徑，執行test函式
+def test():
+    return "This is a test."
 
 
 @app.route("/submit", methods=["POST"])

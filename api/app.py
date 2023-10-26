@@ -9,7 +9,7 @@ def home():
 
 
 @app.route("/ttt")  # 當網站連接到根目錄底下的test路徑，執行test函式
-def test():
+def ttt():
     return "This is ttt 123."
 
 

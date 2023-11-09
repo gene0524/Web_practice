@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
-from githubapi import GitHubUser, GitHubUserRepo, GitHubRepo
+from functions.githubapi import GitHubUser, GitHubRepo, GitHubUserRepo
 
 app = Flask(__name__)  # __name__ 代表目前執行的模組
 

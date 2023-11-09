@@ -17,16 +17,19 @@
       </tr>
       <tr>
         <th style="padding: 8px;">Followers</th>
-        <td style="padding: 8px;"><a href="{{ url_for('github_user_followers', username=username) }}">{{ followers
-            }}</a></td>
+        <td style="padding: 8px;">
+          <a href="{{ url_for('github_user_followers', username=username) }}">{{ followers }}</a>
+        </td>
       </tr>
       <tr>
         <th style="padding: 8px;">Following</th>
-        <td style="padding: 8px;"><a href="{{ url_for('github_user_following', username=username) }}">{{ following
-            }}</a></td>
+        <td style="padding: 8px;">
+          <a href="{{ url_for('github_user_following', username=username) }}">{{ following }}</a>
+        </td>
       </tr>
     </table>
   </div>
+
   <h2>Repo table:</h2>
   <div style="overflow-x:auto;">
     {% for i in range(repos|count) %}
@@ -62,9 +65,11 @@
       </tr>
       {% endfor %}
     </table>
-    <br><br><br>
+    <br>
     {% endfor %}
   </div>
+
+  <a href="/">Back to home</a>
 </body>
 
 </html>

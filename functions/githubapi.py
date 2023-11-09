@@ -168,7 +168,7 @@ class GitHubRepo:
 # Check the rate limit
 user_response = requests.get(
     "https://api.github.com/users/gene0524",
-    headers=headers,
+    headers=headers
 )
 print(user_response.status_code)
 user = user_response.json()
@@ -177,7 +177,7 @@ print(user)
 
 rlim_response = requests.get(
     "https://api.github.com/rate_limit",
-    headers=headers,
+    headers=headers
 )
 print(rlim_response.status_code)
 rate_limit = rlim_response.json()

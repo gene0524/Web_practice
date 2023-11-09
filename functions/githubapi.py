@@ -2,10 +2,10 @@ import requests
 import os
 
 # Authenticate with personal token for higher API rate limit
-# GITHUB_TOKEN = os.environ.get("GH_TOKEN")
-# headers = {
-#     "Authorization": "token " + GITHUB_TOKEN,
-# }
+GITHUB_TOKEN = os.environ.get("GH_TOKEN")
+headers = {
+    "Authorization": "token " + GITHUB_TOKEN,
+}
 
 
 class GitHubUser:
@@ -13,7 +13,7 @@ class GitHubUser:
         self.username = username
         self.response = requests.get(
             "https://api.github.com/users/" + self.username,
-            ##headers=headers,
+            headers=headers,
         )
 
     def getFollowersCount(self):
@@ -31,7 +31,7 @@ class GitHubUser:
     def getFollowers(self):
         self.response = requests.get(
             "https://api.github.com/users/" + self.username + "/followers",
-            ##headers=headers,
+            headers=headers,
         )
         if self.response.status_code == 200:
             followers = self.response.json()
@@ -47,7 +47,7 @@ class GitHubUser:
     def getFollowing(self):
         self.response = requests.get(
             "https://api.github.com/users/" + self.username + "/following",
-            ##headers=headers,
+            headers=headers,
         )
         if self.response.status_code == 200:
             following = self.response.json()
@@ -66,7 +66,7 @@ class GitHubUserRepo:
         self.username = username
         self.response = requests.get(
             "https://api.github.com/users/" + self.username + "/repos",
-            ##headers=headers,
+            headers=headers,
         )
 
     def getRepoName(self):
@@ -120,7 +120,7 @@ class GitHubRepo:
         self.name = repo_full_name
         self.response = requests.get(
             "https://api.github.com/repos/" + repo_full_name + "/commits?per_page=5",
-            ##headers=headers,
+            headers=headers,
         )
 
     def getCommitHash(self):
@@ -168,7 +168,7 @@ class GitHubRepo:
 # Check the rate limit
 user_response = requests.get(
     "https://api.github.com/users/gene0524",
-    # headers=headers,
+    headers=headers,
 )
 print(user_response.status_code)
 user = user_response.json()
@@ -177,7 +177,7 @@ print(user)
 
 rlim_response = requests.get(
     "https://api.github.com/rate_limit",
-    # headers=headers,
+    headers=headers,
 )
 print(rlim_response.status_code)
 rate_limit = rlim_response.json()

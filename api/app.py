@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
+from githubapi import GitHubUser, GitHubUserRepo, GitHubRepo
 
 app = Flask(__name__)  # __name__ 代表目前執行的模組
 
@@ -35,3 +36,62 @@ def query():
 
 if __name__ == "__main__":
     app.run(debugger=True)
+
+
+##########################################
+
+@app.route("/github/form")
+def github_form():
+    return render_template("githubform.html")
+
+
+@app.route("/github/form/submit", methods=["POST"])
+def github_form_submit():
+    input_username = request.form.get("username")
+    return redirect(url_for("github_user", username=input_username))
+
+
+@app.route("/github/<username>")
+def github_user(username):
+    user = GitHubUser(username)
+    followers_count = user.getFollowersCount()
+    following_count = user.getFollowingCount()
+    userRepo = GitHubUserRepo(username)
+    repo_list = userRepo.getRepoLists()
+    # The commits_list will contains a 2D list of each repo
+    commits_list = []
+    for reponame in userRepo.getRepoName():
+        repo = GitHubRepo(reponame)
+        commits_list.append(repo.getRepoCommitsLists())
+    return render_template(
+        "greet.html",
+        username=username,
+        followers=followers_count,
+        following=following_count,
+        repos=repo_list,
+        commits=commits_list,
+    )
+
+
+@app.route("/github/<username>/followers")
+def github_user_followers(username):
+    user = GitHubUser(username)
+    followers, avatar_urls = user.getFollowers()
+    return render_template(
+        "githubfollowers.html",
+        username=username,
+        followers=followers,
+        avatar_urls=avatar_urls,
+    )
+
+
+@app.route("/github/<username>/following")
+def github_user_following(username):
+    user = GitHubUser(username)
+    following, avatar_urls = user.getFollowing()
+    return render_template(
+        "githubfollowing.html",
+        username=username,
+        following=following,
+        avatar_urls=avatar_urls,
+    )

@@ -2,10 +2,10 @@ import requests
 import os
 
 # Authenticate with personal token for higher API rate limit
-GITHUB_TOKEN = os.environ.get("GH_TOKEN")
-headers = {
-    "Authorization": "token " + GITHUB_TOKEN,
-}
+# GITHUB_TOKEN = os.environ.get("GH_TOKEN")
+# headers = {
+#     "Authorization": "token " + GITHUB_TOKEN,
+# }
 
 
 class GitHubUser:
